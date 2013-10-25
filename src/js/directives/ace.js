@@ -1,5 +1,5 @@
 'use strict';
-
+/** ACE editor directive */
 angular.module('ngBlog.directives')
     .directive('ace', function ($timeout) {
         return {
@@ -10,6 +10,7 @@ angular.module('ngBlog.directives')
                 var session = editor.getSession();
                 session.setUseWrapMode(true);
                 session.setMode("ace/mode/markdown");
+                $scope.md.currentRow = 0;
 
                 $scope.$watch("md.src", function () {
                     if (!$scope.md.lastEditFromAce) {
@@ -20,9 +21,24 @@ angular.module('ngBlog.directives')
                     }
                 });
 
+                function markedLines() {
+                    var numLines = session.getLength();
+                    var lines = session.getLines(0, numLines);
+                    for (var i=0; i<numLines; i++) {
+                        if (lines[i].length > 0) {
+                                 if (lines[i][0] === "#") { lines[i] = lines[i] + "<span id='row-" + i + "' />"; }
+                            else if (lines[i][0] === "<") { lines[i] = lines[i] + "<span id='row-" + i + "' />"; }
+                            else if (lines[i][0] === "*") { lines[i] = lines[i] + "<span id='row-" + i + "' />"; }
+                            else                          { lines[i] = "<span id='row-" + i + "' />" + lines[i]; }
+                        }
+                        else { lines[i] = "<span id='row-" + i + "' />\n"; }
+                    }
+                    return lines;
+                }
+
                 editor.on('change', function () {
                     $timeout(function() {
-                        $scope.md.src = editor.getValue();
+                        $scope.md.src = _.reduce(markedLines(), function(memo, line){ return memo + line + "\n"; }, "");;
                         $scope.md.lastEditFromAce = true;
                     });
                 });
@@ -32,23 +48,7 @@ angular.module('ngBlog.directives')
                     var cursor = editor.getCursorPosition();
                     if (cursor.row !== cursorRow) {
                         cursorRow = cursor.row;
-                        var lines = session.getLines(0, session.getLength());
-                        var currentLine = lines[cursor.row];
-
-                        if (currentLine.length > 0) {
-                                 if (currentLine[0] === "#") { currentLine = currentLine + "<span id='currentLine' />"; }
-                            else if (currentLine[0] === "<") { currentLine = currentLine + "<span id='currentLine' />"; }
-                            else if (currentLine[0] === "*") { currentLine = currentLine + "<span id='currentLine' />"; }
-                            else                             { currentLine = "<span id='currentLine' />" + currentLine; }
-                        }
-                        else { currentLine = "<span id='currentLine' />\n"}
-
-                        lines[cursor.row] = currentLine;
-
-                        $timeout(function() {
-                            $scope.md.src = _.reduce(lines, function(memo, line){ return memo + line + "\n"; }, "");
-                            $scope.md.lastEditFromAce = true;
-                        });
+                        $timeout(function() { $scope.md.currentRow = cursor.row;})
                     }
                 });
             }

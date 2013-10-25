@@ -20,6 +20,10 @@ angular.module('ngBlog', ['ngBlog.controllers', 'ngBlog.directives', 'ngRoute'])
                 templateUrl: '/views/blog.html',
                 controller: 'blogCtrl'
             })
+            .when('/edit/:cat/:year/:month/:day/:title', {
+                templateUrl: '/views/edit.html',
+                controller: 'blogCtrl'
+            })
             .when('/edit', {
                 templateUrl: '/views/edit.html',
                 controller: 'blogCtrl'

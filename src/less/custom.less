@@ -11,7 +11,7 @@
 @import "bootstrap/bootstrap.less";
 @import "code-highlight.less";
 
-// Brand colors
+// Brand colors -> used for example for links (naming convention from Bootstrap)
 @brand-primary: #009ACD;
 
 // Scaffolding
@@ -47,6 +47,7 @@
 body {
   font-weight: @font-weight-base;
   padding-bottom: 50px;
+  text-rendering: optimizeLegibility;
 }
 
 .row {
@@ -111,14 +112,14 @@ img {
 .transparent {
   opacity:0.9;
   -webkit-animation-name: shadow;
-  -webkit-animation-duration: 2s;
+  -webkit-animation-duration: 1.2s;
   -webkit-animation-iteration-count: infinite;
 }
 
 @-webkit-keyframes shadow {
-  0% {box-shadow: 1px 1px 10px rgba(50, 50, 100, 0.75);}
-  50% {box-shadow: 1px 1px 16px rgba(50, 50, 100, 0.75);}
-  100% {box-shadow: 1px 1px 10px rgba(50, 50, 100, 0.75);}
+  0% {box-shadow: 1px 1px 15px rgba(50, 50, 100, 0.75);}
+  50% {box-shadow: 1px 1px 20px rgba(50, 50, 100, 0.75);}
+  100% {box-shadow: 1px 1px 15px rgba(50, 50, 100, 0.75);}
 }
 
 #editor {
