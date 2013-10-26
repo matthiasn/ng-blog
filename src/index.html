@@ -24,11 +24,13 @@
   <body data-ng-app="ngBlog">
     <div data-ng-controller="blogCtrl">
 
-        <nav class="navbar navbar-default navbar-static-top navbar-inverse transparent" role="navigation">
-            <a class="navbar-brand" href="#">ng-blog</a>
-        </nav>
+        <div class="navbar navbar-default navbar-static-top navbar-inverse transparent" role="navigation">
+            <div class="container">
+                <a class="navbar-brand" href="#">ng-blog</a>
+            </div>
+        </div>
 
-        <div ng-view></div>
+        <div class="container" ng-view></div>
 
     </div>
     <!--(if target dev)><!-->
