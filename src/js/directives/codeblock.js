@@ -12,20 +12,23 @@ angular.module('ngBlog.directives')
                     $scope.code = res.data
                     $scope.mode = attrs.mode;
 
-                    $timeout(function() {
-                        hljs.highlightBlock(elem.find('pre code')[0])
-                    }, 0);
+                    $timeout(function() { hljs.highlightBlock(elem.find('pre code')[0]) }, 0);
 
-                    var lineHeight = $('.marker').css('line-height');
+                    var lineHeight = parseInt(elem.find('pre').css('line-height'));
+                    var offset = 5;
 
-                    $timeout(function() { elem.find('.marker').css({top: "20px"}); }, 1000);
-                    $timeout(function() { elem.find('.marker').css({top: "40px"}); }, 2000);
-                    $timeout(function() { elem.find('.marker').css({top: "60px"}); }, 3000);
-                    $timeout(function() { elem.find('.marker').css({top: "80px"}); }, 4000);
-                    $timeout(function() { elem.find('.marker').css({top: "100px"}); }, 5000);
-                    $timeout(function() { elem.find('.marker').css({top: "120px"}); }, 6000);
-                    $timeout(function() { elem.find('.marker').css({top: "140px"}); }, 7000);
-                    $timeout(function() { elem.find('.marker').css({top: "160px"}); }, 8000);
+                    function getPos(line) { return (((line - 1) * lineHeight) + offset) + "px"; }
+
+                    $timeout(function() { elem.find('.marker').css({top: getPos(2)}); }, 1000);
+                    $timeout(function() { elem.find('.marker').css({top: getPos(3)}); }, 2000);
+                    $timeout(function() { elem.find('.marker').css({top: getPos(4)}); }, 3000);
+                    $timeout(function() { elem.find('.marker').css({top: getPos(5)}); }, 4000);
+                    $timeout(function() { elem.find('.marker').css({top: getPos(6), height: "36px"}); }, 5000);
+                    $timeout(function() { elem.find('.marker').css({top: getPos(7)}); }, 6000);
+                    $timeout(function() { elem.find('.marker').css({top: getPos(8)}); }, 7000);
+                    $timeout(function() { elem.find('.marker').css({top: getPos(9), height: "18px"}); }, 8000);
+                    $timeout(function() { elem.find('.marker').css({top: getPos(12)}); }, 9000);
+                    $timeout(function() { elem.find('.marker').css({top: getPos(15), height: "72px"}); }, 10000);
                 });
             }
         }
