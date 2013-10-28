@@ -33,7 +33,7 @@
 @border-radius-large:  0px;
 @border-radius-small:  0px;
 
-@pre-bg:               #f1f1f1;
+@pre-bg:               rgba(0,0,0,0);
 @pre-color:            @gray-darker;
 @pre-border-color:     #eee;
 
@@ -77,10 +77,12 @@ blockquote {
 }
 
 pre {
-  overflow-x: auto;
   word-wrap: normal;
   white-space: pre;
   word-break: normal;
+  position: relative;
+  overflow-x: auto;
+  z-index: 10;
   padding: ((@line-height-computed - 1) / 4) ((@line-height-computed - 1) / 2);
 
   code {
@@ -129,4 +131,19 @@ img {
 
 .navbar-brand {
   font-weight: 600;
+}
+
+.codeblock {
+  overflow-x: auto;
+  position: relative;
+}
+
+.marker {
+  top: 0;
+  left: 0;
+  z-index: 1;
+  right: 0;
+  height: 50px;
+  position: absolute;
+  background: rgba(128, 200, 0, 0.5);
 }

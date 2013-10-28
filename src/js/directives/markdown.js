@@ -13,6 +13,8 @@
                     elem.empty().append($compile(converter.makeHtml($scope.md.src))($scope));
                 });
 
+                $scope.hl = {line: 1}
+
                 $scope.$watch("md.currentRow", function () {
                     $timeout(function() {  // find currentLine span from editor, scroll to that position
                         var currentLine = document.getElementById('row-' + $scope.md.currentRow);
