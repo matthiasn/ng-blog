@@ -25,12 +25,14 @@ angular.module('ngBlog.directives')
                 $scope.$watch("snippet", function () {
                     if ($scope.snippet) {
                         $http({method: 'GET', url: $scope.snippet.file, cache: false}).then(function (res) {
-                            $scope.code = res.data;
+                            $scope.code = _.str.lines(res.data).slice($scope.snippet.fromLine -1,
+                                $scope.snippet.toLine).join("\n");
                             $scope.marker = { top: 0, height: 0 };
                             var lineHeight = parseInt(elem.find('pre').css('line-height'));
                             var offset = 5;
                             var timeoutPromise;
                             var currentMarker = -1;
+                            var lineOffset = $scope.snippet.fromLine;
 
                             /** highlight code within the pre code element inside this directive */
                             $timeout(function() { hljs.highlightBlock(elem.find('pre code')[0]) });
@@ -50,7 +52,7 @@ angular.module('ngBlog.directives')
                                 }
                             };
 
-                            function getPos(line) { return ((line - 1) * lineHeight) + offset; }
+                            function getPos(line) { return ((line - lineOffset) * lineHeight) + offset; }
                             function getHeight(lines) {return lineHeight * lines + 1}
                             function curr() { return currentMarker % $scope.snippet.markers.length; }
                             function setMarker() {
