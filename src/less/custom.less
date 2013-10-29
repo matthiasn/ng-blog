@@ -10,6 +10,7 @@
 // Core variables and mixins
 @import "bootstrap/bootstrap.less";
 @import "code-highlight.less";
+@import "font-awesome/font-awesome.less";
 
 // Brand colors -> used for example for links (naming convention from Bootstrap)
 @brand-primary: #009ACD;
@@ -43,6 +44,8 @@
 
 @navbar-inverse-bg: #333;
 @navbar-inverse-brand-color: lightgray;
+
+@fa-font-path: "/fonts";
 
 body {
   font-weight: @font-weight-base;
@@ -136,6 +139,7 @@ img {
 .codeblock {
   overflow-x: auto;
   position: relative;
+  margin-top: 20px;
 }
 
 .marker {
@@ -150,4 +154,39 @@ img {
 .marker_description {
   font-weight: 600;
   padding: 0px 20px 20px 20px;
+}
+
+.control {
+  color: #888;
+  opacity: 0.8;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background-color: #ddd;
+  padding: 2px 5px 2px 5px;
+  margin: 5px;
+}
+
+.code-container {
+  height: auto;
+  position: relative;
+}
+
+.code-header {
+  background-color: #888;
+  color: #ffffff;
+  font-family: @font-family-monospace;
+  padding: 4px 10px 4px 10px;
+  font-weight: bold;
+
+  a {
+    font-weight: bold;
+    float: right;
+    color: lighten(@brand-primary, 30%);
+  }
+
+  .lines {
+    float: right;
+    padding-left: 30px;
+  }
 }
