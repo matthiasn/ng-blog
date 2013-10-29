@@ -4,42 +4,42 @@ angular.module('ngBlog.directives')
     .directive('codeblock', function ($http, $timeout) {
         return {
             restrict: 'EA',
-            scope: { src: "=src" },
+            scope: { snippet: "=snippet" },
             template: "<div class='codeblock'>"
-                + "<pre><code class='language-{{ mode }}'>{{ code }}</code></pre><div style='top: {{ marker.top }}px; height: {{ marker.height }}px' class='marker'></div><div class='marker_description'>{{ marker.description }}</div></div>",
+                + "<pre><code class='language-{{ lang }}'>{{ code }}</code></pre><div style='top: {{ marker.top }}px; height: {{ marker.height }}px' class='marker'></div><div class='marker_description'>{{ marker.description }}</div></div>",
             link: function ($scope, elem, attrs) {
-                $http({method: 'GET', url: $scope.src, cache: false}).then(function (res) {
-                    $scope.code = res.data
-                    $scope.mode = attrs.mode;
 
-                    $timeout(function() { hljs.highlightBlock(elem.find('pre code')[0]) }, 0);
+                $scope.$watch("snippet", function () {
+                    $timeout(function() {  // find currentLine span from editor, scroll to that position
 
-                    var lineHeight = parseInt(elem.find('pre').css('line-height'));
-                    var offset = 5;
+                        if ($scope.snippet) {
+                            $http({method: 'GET', url: $scope.snippet.file, cache: false}).then(function (res) {
+                                $scope.code = res.data
+                                $scope.lang = $scope.snippet.lang;
 
-                    $scope.marker = { top: 0, height: 0, description: "" };
+                                $timeout(function() { hljs.highlightBlock(elem.find('pre code')[0]) });
 
-                    function getPos(line) { return ((line - 1) * lineHeight) + offset; }
-                    function getHeight(lines) {return lineHeight * lines + 1}
+                                var lineHeight = parseInt(elem.find('pre').css('line-height'));
+                                var offset = 5;
 
-                    var currentMarker = 0;
-                    var markers = [
-                        { line: 1, height: 3, duration: 2000, description: "Something is happening in line 4" },
-                        { line: 8, height: 7, duration: 4000, description: "line 8" },
-                        { line: 13, height: 2, duration: 2000, description: "wow, look at line 13" },
-                        { line: 6, height: 5, duration: 3000, description: "cool stuff in line 6" },
-                        { line: 9, height: 3, duration: 2000, description: "line 9 is interesting, too" },
-                    ];
+                                $scope.marker = { top: 0, height: 0, description: "" };
 
-                    function curr() { return currentMarker % markers.length; }
-                    function next() {
-                        $scope.marker.top = getPos(markers[curr()].line);
-                        $scope.marker.height = getHeight(markers[curr()].height);
-                        $scope.marker.description = markers[curr()].description;
-                        currentMarker++;
-                        $timeout(next, markers[curr()].duration);
-                    }
-                    next();
+                                function getPos(line) { return ((line - 1) * lineHeight) + offset; }
+                                function getHeight(lines) {return lineHeight * lines + 1}
+
+                                var currentMarker = 0;
+                                function curr() { return currentMarker % $scope.snippet.markers.length; }
+                                function next() {
+                                    $scope.marker.top = getPos($scope.snippet.markers[curr()].line);
+                                    $scope.marker.height = getHeight($scope.snippet.markers[curr()].height);
+                                    $scope.marker.description = $scope.snippet.markers[curr()].description;
+                                    currentMarker++;
+                                    $timeout(next, $scope.snippet.markers[curr()].duration);
+                                }
+                                next();
+                            });
+                        }
+                    });
                 });
             }
         }

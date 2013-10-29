@@ -7,17 +7,20 @@ angular.module('ngBlog.controllers', [])
         if (r.cat) {
             $scope.url = r.cat;
             if (r.title) {
-                $scope.url = $scope.url + '/posts/' + r.year + '-' + r.month + '-' + r.day + '-' + r.title + '.md';
+                $scope.url = $scope.url + '/posts/' + r.year + '-' + r.month + '-' + r.day + '-' + r.title;
             }
-            else { $scope.url = $scope.url + '/index.md'; }
+            else { $scope.url = $scope.url + '/index'; }
 
-            $http({method: 'GET', url: $scope.url, cache: false})
+            $http({method: 'GET', url: $scope.url + '.md', cache: false})
                 .then(function (res) {
                     $scope.markdown.src = res.data;
+                    $scope.markdown.url = $scope.url;
                     $scope.markdown.lastEditFromAce = false;
                 }, function () {
                     $scope.markdown = { src: "#Sorry  \n There seems to be nothing at that address." };
-                    $timeout(function () { $location.url("/"); }, 3000);
+                    $timeout(function () {
+                        $location.url("/");
+                    }, 3000);
                 });
         }
     });
