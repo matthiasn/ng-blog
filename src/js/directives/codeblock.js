@@ -28,6 +28,7 @@ angular.module('ngBlog.directives')
                             $scope.code = _.str.lines(res.data).slice($scope.snippet.fromLine -1,
                                 $scope.snippet.toLine).join("\n");
                             $scope.marker = { top: 0, height: 0 };
+                            $scope.commentBanner = { top: 0 };
                             var lineHeight = parseInt(elem.find('pre').css('line-height'));
                             var offset = 5;
                             var timeoutPromise;
@@ -53,11 +54,26 @@ angular.module('ngBlog.directives')
                             };
 
                             function getPos(line) { return ((line - lineOffset) * lineHeight) + offset; }
+                            function getCommentPos() {
+                                var line = $scope.snippet.markers[curr()].line;
+                                var height = $scope.snippet.markers[curr()].height;
+
+                                if (line - lineOffset < 3) {
+
+                                    return ((line + 0.3 + height - lineOffset) * lineHeight) + offset;
+
+                                }
+                                else {
+                                    return ((line - 1.5 - lineOffset) * lineHeight) + offset;
+                                }
+                            }
+
                             function getHeight(lines) {return lineHeight * lines + 1}
                             function curr() { return currentMarker % $scope.snippet.markers.length; }
                             function setMarker() {
                                 $scope.marker.top = getPos($scope.snippet.markers[curr()].line) + "px";
                                 $scope.marker.height = getHeight($scope.snippet.markers[curr()].height) + "px";
+                                $scope.commentBanner.top = getCommentPos() + "px";
                                 $scope.description = $scope.snippet.markers[curr()].description;
                             }
 
