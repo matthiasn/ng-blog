@@ -4,7 +4,7 @@ describe('spec for markdown directives', function () {
     var $scope;
     beforeEach(inject(function ($rootScope) {
         $scope = $rootScope.$new();
-        $scope.markdown = { src: "#TEST HEADLINE"};
+        $scope.markdown = { src: "#TEST HEADLINE" };
     }));
 
     describe('when provided with valid markdown', function () {
@@ -12,6 +12,7 @@ describe('spec for markdown directives', function () {
             inject(function ($compile) {
                 var element = $compile('<div markdown md="markdown"></div>')($scope);
                 $scope.$digest();
+                console.log(element.html())
                 expect(element.html()).toContain('TEST HEADLINE');
             });
         });

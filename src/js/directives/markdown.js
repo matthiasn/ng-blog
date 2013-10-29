@@ -11,8 +11,10 @@
             link: function ($scope, elem, attrs) {
                 $scope.snippets = {};
                 $scope.$watch("md.src", function () {
-                    $http({method: 'GET', url: $scope.md.url + '.json', cache: false})
-                        .then(function (res) { $scope.snippets = res.data; });
+                    if ($scope.md.url) {
+                        $http({method: 'GET', url: $scope.md.url + '.json', cache: false})
+                            .then(function (res) { $scope.snippets = res.data; });
+                    }
                     elem.empty().append($compile(converter.makeHtml($scope.md.src))($scope));
                 });
 

@@ -1,5 +1,6 @@
 node_modules
 dist
+build
 *.iml
 .idea/
 src/blog
