@@ -3,7 +3,7 @@
         <a ng-href="{{ snippet.url }}" target="_blank">{{ snippet.fileName }}</a></div>
 
     <div class="code-container">
-        <pre><code class="language-{{ lang }}">{{ code }}</code></pre>
+        <pre><code class="language-{{ snippet.lang }}">{{ code }}</code></pre>
         <div ng-style="marker" class="marker"></div>
         <div class="control">
             <a ng-click="prev()" class="fa fa-step-backward fa-lg"></a>
