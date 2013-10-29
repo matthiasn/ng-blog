@@ -18,6 +18,7 @@ module.exports = function (grunt) {
                     'src/js/vendor/ace-mode-markdown.min.js',
                     'src/js/app.js',
                     'build/js/app.templates.js',
+                    'src/js/routes.js',
                     'src/js/controllers.js',
                     'src/js/directives/*.js'
                 ],
@@ -27,7 +28,6 @@ module.exports = function (grunt) {
         copy: {
             main: {
                 files: [
-                    {expand: true, cwd: 'src', src: ['views/**'], dest: 'dist/'},
                     {expand: true, cwd: 'src', src: ['fonts/**'], dest: 'dist/'},
                     {expand: true, cwd: 'src', src: ['blog/**'], dest: 'dist/'}
                 ]
@@ -60,7 +60,7 @@ module.exports = function (grunt) {
         ngtemplates: {
             ngBlog: {
                 cwd:      'src',
-                src:      ['tpl/**.html'],
+                src:      ['views/**.html', 'tpl/**.html'],
                 dest:     'build/js/app.templates.js'
             }
         }
