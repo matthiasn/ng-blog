@@ -6,10 +6,9 @@
         <pre><code class="language-{{ lang }}">{{ code }}</code></pre>
         <div ng-style="marker" class="marker"></div>
         <div class="control">
-            <i class="fa fa-step-backward fa-2x"></i>
-            <i class="fa fa-play fa-2x"></i>
-            <i class="fa fa-pause fa-2x"></i>
-            <i class="fa fa-step-forward fa-2x"></i>
+            <a ng-click="prev()" class="fa fa-step-backward fa-lg"></a>
+            <a ng-click="control.toggle()" class="fa fa-lg" ng-class="control.symbol()"></a>
+            <a ng-click="next()" class="fa fa-step-forward fa-lg"></a>
         </div>
     </div>
 
