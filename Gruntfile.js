@@ -8,14 +8,14 @@ module.exports = function (grunt) {
             dist: {
                 src: [
                     'src/js/vendor/jquery-1.10.2.min.js',
-                    'src/js/vendor/angular.js',
+                    'src/js/vendor/angular.min.js',
                     'src/js/vendor/angular-route.js',
                     'src/js/vendor/showdown.js',
                     'src/js/vendor/highlight.pack.js',
                     'src/js/vendor/underscore.js',
                     'src/js/vendor/underscore.string.js',
-                    'src/js/vendor/ace.min.js',
-                    'src/js/vendor/ace-mode-markdown.min.js',
+                    //'src/js/vendor/ace.min.js',
+                    //'src/js/vendor/ace-mode-markdown.min.js',
                     'src/js/app.js',
                     'build/js/app.templates.js',
                     'src/js/routes.js',
