@@ -12,6 +12,7 @@
                 $scope.snippets = {};
                 $scope.$watch("md.src", function () {
                     if ($scope.md.url) {
+                        console.log($scope.md.url);
                         $http({method: 'GET', url: $scope.md.url + '.json', cache: false})
                             .then(function (res) { $scope.snippets = res.data; });
                     }

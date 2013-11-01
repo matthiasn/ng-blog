@@ -20,22 +20,30 @@ module.exports = function (grunt) {
                     'src/js/directives/*.js'
                 ], dest: 'dist/js/<%= pkg.name %>.js' } },
 
-        copy: { main: {files: [
-            { expand: true, cwd: 'src',  src: ['fonts/**'], dest: 'dist/'},
-            { expand: true, cwd: 'src',  src: ['blog/**'],  dest: 'dist/'},
-            { expand: true, cwd: 'dist', src: ['**'],       dest: '/usr/local/Cellar/nginx/1.4.2/html/'},
-            { expand: true, cwd: 'src',  src: ['**'],       dest: '/usr/local/Cellar/nginx/1.4.2/html/src'} ]}},
+        copy: {
+            main: { files: [
+                { expand: true, cwd: 'src',  src: ['fonts/**'], dest: 'dist/'},
+                { expand: true, cwd: 'src',  src: ['blog/**'],  dest: 'dist/'} ] },
+            nginx: { files: [
+                { expand: true, cwd: 'dist', src: ['**'], dest: '/usr/local/Cellar/nginx/1.4.2/html/'},
+                { expand: true, cwd: 'src',  src: ['**'], dest: '/usr/local/Cellar/nginx/1.4.2/html/src'} ] }
+        },
 
-        targethtml:  { dist:   { files: { 'dist/index.html': 'src/index.html'} } },
-        karma:       { unit:   { configFile: 'conf/karma.conf.js', singleRun: true } },
-        less:        { dist:   { files: { "dist/css/main.css": "src/less/custom.less" } } },
-        ngtemplates: { ngBlog: { cwd: 'src', src: ['views/**.html', 'tpl/**.html'], dest: 'build/js/app.templates.js' } }
+        watch: { less:    { files: ['src/**/*.less'], tasks: ['less'],           options: { spawn: false } },
+                 scripts: { files: ['src/**/*.js'],   tasks: ['karma','concat'], options: { spawn: false } },
+                 dist:    { files: ['dist/**'],   tasks: ['copy:nginx'],         options: { spawn: true } }
+        },
+        targethtml:  { dist:    { files: { 'dist/index.html': 'src/index.html'} } },
+        karma:       { unit:    { configFile: 'conf/karma.conf.js', singleRun: true } },
+        less:        { dist:    { files: { "dist/css/main.css": "src/less/custom.less" } } },
+        ngtemplates: { ngBlog:  { cwd: 'src', src: ['views/**.html', 'tpl/**.html'], dest: 'build/js/app.templates.js' } }
     });
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-targethtml');
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-angular-templates');
     grunt.registerTask('dist', ['ngtemplates', 'karma', 'less', 'concat', 'targethtml', 'copy']);
 };
