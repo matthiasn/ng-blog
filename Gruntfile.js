@@ -1,12 +1,9 @@
 module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-        concat: {
-            options: {
-                separator: ';'
-            },
-            dist: {
-                src: [
+
+        concat: { options: { separator: ';' },
+            dist: { src: [
                     'src/js/vendor/jquery-1.10.2.min.js',
                     'src/js/vendor/angular.min.js',
                     'src/js/vendor/angular-route.js',
@@ -21,49 +18,18 @@ module.exports = function (grunt) {
                     'src/js/routes.js',
                     'src/js/controllers.js',
                     'src/js/directives/*.js'
-                ],
-                dest: 'dist/js/<%= pkg.name %>.js'
-            }
-        },
-        copy: {
-            main: {
-                files: [
-                    {expand: true, cwd: 'src', src: ['fonts/**'], dest: 'dist/'},
-                    {expand: true, cwd: 'src', src: ['blog/**'], dest: 'dist/'}
-                ]
-            }
-        },
-        targethtml: {
-            dist: {
-                files: {
-                    'dist/index.html': 'src/index.html'
-                }
-            }
-        },
-        karma: {
-            unit: {
-                configFile: 'conf/karma.conf.js',
-                singleRun: true
-            }
-        },
-        less: {
-            dist: {
-                options: {
-                    paths: ["assets/css"],
-                    yuicompress: true
-                },
-                files: {
-                    "dist/css/main.css": "src/less/custom.less"
-                }
-            }
-        },
-        ngtemplates: {
-            ngBlog: {
-                cwd:      'src',
-                src:      ['views/**.html', 'tpl/**.html'],
-                dest:     'build/js/app.templates.js'
-            }
-        }
+                ], dest: 'dist/js/<%= pkg.name %>.js' } },
+
+        copy: { main: {files: [
+            { expand: true, cwd: 'src',  src: ['fonts/**'], dest: 'dist/'},
+            { expand: true, cwd: 'src',  src: ['blog/**'],  dest: 'dist/'},
+            { expand: true, cwd: 'dist', src: ['**'],       dest: '/usr/local/Cellar/nginx/1.4.2/html/'},
+            { expand: true, cwd: 'src',  src: ['**'],       dest: '/usr/local/Cellar/nginx/1.4.2/html/src'} ]}},
+
+        targethtml:  { dist:   { files: { 'dist/index.html': 'src/index.html'} } },
+        karma:       { unit:   { configFile: 'conf/karma.conf.js', singleRun: true } },
+        less:        { dist:   { files: { "dist/css/main.css": "src/less/custom.less" } } },
+        ngtemplates: { ngBlog: { cwd: 'src', src: ['views/**.html', 'tpl/**.html'], dest: 'build/js/app.templates.js' } }
     });
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');
