@@ -7,19 +7,13 @@ angular.module('ngBlog.services').factory('resourceCache', function ($http) {
     var cache = {};
 
     var loadResource = function(url) {
-        $http({method: 'GET', url: url, cache: false}).then(function (res) {
-            cache[url].data = res.data;
-        });
+        $http({method: 'GET', url: url, cache: false}).then(function (res) { cache[url].data = res.data; });
     };
 
     exports.getResource = function(url, expectObject) {
         if (!cache.hasOwnProperty(url)) {
-            if(expectObject) {
-                cache[url] = { url: url, data: {} };
-            }
-
-            else { cache[url] = { url: url, data: "" };
-            }
+            if (expectObject) { cache[url] = { url: url, data: {} }; }
+            else              { cache[url] = { url: url, data: "" }; }
             loadResource(url);
         }
         return cache[url];
