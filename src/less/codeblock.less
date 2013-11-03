@@ -1,0 +1,87 @@
+@import "custom.less";
+
+.codeblock {
+  overflow-x: auto;
+  position: relative;
+  margin-top: 20px;
+
+  pre {
+    word-wrap: normal;
+    white-space: pre;
+    word-break: normal;
+    position: relative;
+    overflow-x: auto;
+    z-index: 10;
+    padding: ((@line-height-computed - 1) / 4) ((@line-height-computed - 1) / 2);
+
+    code { white-space: pre; }
+  }
+
+  .marker {
+    left: 0;
+    z-index: 1;
+    font-family: @font-family-monospace;
+    right: 0;
+    position: absolute;
+    background: rgba(128, 200, 0, 0.5);
+  }
+
+  .comment-banner {
+    left: 0;
+    z-index: 11;
+    font-family: @font-family-monospace;
+    right: 0;
+    position: absolute;
+    text-align: center;
+    height: 22px;
+
+    .text {
+      color: #444;
+      width: auto;
+      background: rgba(240, 240, 240, 0.85);
+      padding: 5px 10px 7px 10px;
+      font-family: @font-family-sans-serif;
+      font-weight: bold;
+      text-shadow: 0 0 10px white;
+    }
+  }
+
+  .control {
+    opacity: 0.5;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background-color: #ddd;
+    padding: 2px 4px 2px 10px;
+    margin: 17px;
+    z-index: 100;
+    font-size: @font-size-base;
+
+    a {
+      color: #333;
+      padding: 0 5px 5px 5px;
+      width: 30px;
+      &:hover { color: darken(@brand-primary, 5%); }
+    }
+  }
+
+  .code-container { height: auto; position: relative; }
+
+  .code-header {
+    background-color: #888;
+    color: #ffffff;
+    font-family: @font-family-monospace;
+    padding: 4px 4px 4px 10px;
+    font-weight: bold;
+    font-size: @font-size-base;
+
+    a {
+      font-weight: bold;
+      float: right;
+      color: lighten(@brand-primary, 30%);
+      &:hover  { color: darken(@brand-primary, 5%); }
+    }
+
+    .lines { float: right; padding-left: 20px; }
+  }
+}
