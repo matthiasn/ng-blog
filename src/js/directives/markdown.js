@@ -7,27 +7,11 @@
         var converter = new Showdown.converter();  // Markdown -> HTML converter
         return {
             restrict: 'A',
-            scope: { md: "=md" },
+            scope: { md: "=md", snippets: "=snippets" },
             link: function ($scope, elem, attrs) {
-                $scope.snippets = {};
-                $scope.$watch("md.src", function () {
-                    if ($scope.md.url) {
-                        console.log($scope.md.url);
-                        $http({method: 'GET', url: $scope.md.url + '.json', cache: false})
-                            .then(function (res) { $scope.snippets = res.data; });
-                    }
-                    elem.empty().append($compile(converter.makeHtml($scope.md.src))($scope));
-                });
-
-                $scope.$watch("md.currentRow", function () {
-                    $timeout(function() {  // find currentLine span from editor, scroll to that position
-                        var currentLine = document.getElementById('row-' + $scope.md.currentRow);
-                        if (currentLine) {
-                            var offset = currentLine.offsetTop;
-                            elem.scrollTop(offset - 200);
-                        }
-                    }, 100);
-                });
+                var render = function () { elem.empty().append($compile(converter.makeHtml($scope.md.data))($scope)); };
+                $scope.$watch("md.data",  render);
+                $scope.$watch("snippets.data", render);
             }
         }
     });
