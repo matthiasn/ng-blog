@@ -13,7 +13,7 @@ angular.module('ngBlog.services').factory('resourceCache', function ($http) {
     exports.getResource = function(url, expectObject) {
         if (!cache.hasOwnProperty(url)) {
             if (expectObject) { cache[url] = { url: url, data: {} }; }
-            else              { cache[url] = { url: url, data: "" }; }
+            else              { cache[url] = { url: url, data: "#test" }; }
             loadResource(url);
         }
         return cache[url];

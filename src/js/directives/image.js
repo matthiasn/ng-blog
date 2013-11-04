@@ -4,10 +4,10 @@
  *  Usage:  <div image name='blog/images/test.jpg'></div>
  */
 angular.module('ngBlog.directives')
-    .directive('image', function ($timeout) {
+    .directive('image', function () {
         return {
             restrict: 'EA',
-            scope: { name: "=name" },
+            scope: {},
             template: "<img src='{{src}}' >",
             link: function ($scope, elem, attrs) {
                 var file = attrs.name.split('.');
@@ -19,7 +19,9 @@ angular.module('ngBlog.directives')
                     if (width > 1200) { suffix = "-1600"; }
                 }
 
-                $scope.src = file[0] + suffix + '.' + file[1];
+                $scope.src = "blog/images/" + file[0] + suffix + '.' + file[1];
+
+                console.log($scope.src)
             }
         }
     });

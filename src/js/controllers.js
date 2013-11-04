@@ -12,4 +12,5 @@ angular.module('ngBlog.controllers', [])
             $scope.markdown = resourceCache.getResource($scope.url + ".md", false);
             $scope.snippets = resourceCache.getResource($scope.url + ".json", true);
         }
+
     });
