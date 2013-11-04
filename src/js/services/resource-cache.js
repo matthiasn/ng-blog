@@ -21,8 +21,5 @@ angular.module('ngBlog.services').factory('resourceCache', function ($http) {
 
     exports.refresh = function(url) { loadResource(url); };
 
-    var sse = new EventSource("/sse");
-    sse.onmessage = function (event) { loadResource(event.data); };
-
     return exports;
 });
