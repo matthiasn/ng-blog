@@ -7,6 +7,7 @@ angular.module('ngBlog.directives')
             scope: { md: "=md", snippet: "=snippet" },
             templateUrl: "tpl/article.tpl.html",
             link: function ($scope, elem, attrs) {
+                $scope.lines = [];
 
 
             }

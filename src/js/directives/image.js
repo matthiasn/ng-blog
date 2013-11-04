@@ -8,7 +8,8 @@ angular.module('ngBlog.directives')
         return {
             restrict: 'EA',
             scope: {},
-            template: "<img src='{{src}}' >",
+            template: "<img class='image' src='{{src}}' >",
+            replace: true,
             link: function ($scope, elem, attrs) {
                 var file = attrs.name.split('.');
                 var suffix = "";
@@ -20,8 +21,6 @@ angular.module('ngBlog.directives')
                 }
 
                 $scope.src = "blog/images/" + file[0] + suffix + '.' + file[1];
-
-                console.log($scope.src)
             }
         }
     });

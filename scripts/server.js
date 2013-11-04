@@ -56,4 +56,8 @@ fileServer.listen(parseInt(port, 10), function () {
     sse.on('connection', function (client) { // register watcher when connection starts
         watcher.on('change', function (path) { client.send(path); }); // send path of changed file
     });
+    sse.on('close', function() {
+        console.log("close")
+        watcher.close();
+    });
 });

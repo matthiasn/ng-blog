@@ -6,11 +6,13 @@
     .directive('markdown', function ($compile, showdown) {
         return {
             restrict: 'A',
-            scope: { md: "=md", snippets: "=snippets" },
+            scope: { md: "=md", config: "=config" },
             link: function ($scope, elem) {
-                var render = function () { elem.empty().append($compile(showdown.makeHtml($scope.md.data))($scope)); };
+                var render = function () {
+                    elem.empty().append($compile(showdown.makeHtml($scope.md.data))($scope));
+                };
                 $scope.$watch("md.data",  render);
-                $scope.$watch("snippets.data", render);
+                $scope.$watch("config.data", render);
             }
         }
     });

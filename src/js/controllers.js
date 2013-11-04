@@ -10,7 +10,7 @@ angular.module('ngBlog.controllers', [])
             }
             else { $scope.url = $scope.url + '/index'; }
             $scope.markdown = resourceCache.getResource($scope.url + ".md", false);
-            $scope.snippets = resourceCache.getResource($scope.url + ".json", true);
+            $scope.config = resourceCache.getResource($scope.url + ".json", true);
         }
 
     });
