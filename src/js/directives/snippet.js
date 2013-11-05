@@ -1,7 +1,7 @@
 'use strict';
 /** Codeblock directive, highlights syntax using highlight.js */
 angular.module('ngBlog.directives')
-    .directive('codeblock', function ($http, $timeout, resourceCache) {
+    .directive('codeblock', function (resourceCache) {
         return {
             restrict: 'EA',
             scope: { src: "=src" },
@@ -26,14 +26,13 @@ angular.module('ngBlog.directives')
             }
         }
     })
-    .directive('animatedCodeblock', function($http, $timeout, resourceCache) {
+    .directive('snippet', function($timeout, resourceCache) {
         return {
             restrict: 'EA',
             scope: { snippet: "=snippet" },
-            templateUrl: "tpl/codeblock.tpl.html",
-            link: function ($scope, elem, attrs) {
+            templateUrl: "tpl/snippet.tpl.html",
+            link: function ($scope, elem) {
                 $scope.code = resourceCache.getResource($scope.snippet.file, false);
-                $scope.mode = attrs.mode;
                 $scope.$watch("code.data", function () {
                     $scope.codeRange = _.str.lines($scope.code.data).slice($scope.snippet.fromLine - 1,
                         $scope.snippet.toLine).join("\n");
@@ -94,7 +93,5 @@ angular.module('ngBlog.directives')
                     }
                 });
             }
-
-
         }
     });
