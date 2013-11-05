@@ -13,13 +13,14 @@ angular.module('ngBlog.directives')
             replace: true,
             link: function ($scope, elem) {
                 // assign height style from cached configuration to avoid scroll issue in edit mode
-                if ($scope.hasOwnProperty("image.height") && $scope.image.height > 0) { $scope.style = { height: $scope.image.height + "px" }; }
-
-                // set element height in figure configuration
-                $timeout(function() {
-                    var height = elem.height();
-                    if (height > 0) { $scope.image.height = height; }
-                }, 3000);
+                if ($scope.hasOwnProperty("image") && $scope.image.height > 0) {
+                    $scope.style = { height: $scope.image.height + "px" };
+                } else {
+                    $timeout(function() {
+                        var height = elem.height();
+                        if (height > 0) { $scope.image.height = height; } // set element height in figure configuration
+                    }, 3000);
+                }
 
                 var file = $scope.image.src.split('.');
                 var suffix = "";

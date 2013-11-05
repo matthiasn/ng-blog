@@ -25,15 +25,26 @@ var watcher = chok.watch('blog', { ignored: /^\./, persistent: true });
 var fileServer = http.createServer(function(request, response) {
     var filename = path.join(process.cwd(), url.parse(request.url).pathname);
 
+    console.log(request.url)
+
     fs.exists(filename, function(exists) {
         if(!exists) {
-            response.writeHead(404, {"Content-Type": "text/plain"});
-            response.write("404 Not Found\n");
-            response.end();
+            fs.readFile("index.html", "binary", function(err, file) {
+                if(err) {
+                    response.writeHead(500, {"Content-Type": "text/plain"});
+                    response.write(err + "\n");
+                    response.end();
+                    return;
+                }
+                response.writeHead(200);
+                response.write(file, "binary");
+                response.end();
+            });
+
             return;
         }
 
-        if (fs.statSync(filename).isDirectory()) filename += '/index.html';
+        if (fs.statSync(filename).isDirectory()) filename = 'index.html';
 
         fs.readFile(filename, "binary", function(err, file) {
             if(err) {
@@ -57,7 +68,6 @@ fileServer.listen(parseInt(port, 10), function () {
         watcher.on('change', function (path) { client.send(path); }); // send path of changed file
     });
     sse.on('close', function() {
-        console.log("close")
         watcher.close();
     });
 });
