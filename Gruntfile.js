@@ -23,10 +23,7 @@ module.exports = function (grunt) {
         copy: {
             main: { files: [
                 { expand: true, cwd: 'src',  src: ['fonts/**'], dest: 'dist/'},
-                { expand: true, cwd: 'src',  src: ['blog/**'],  dest: 'dist/'} ] },
-            nginx: { files: [
-                { expand: true, cwd: 'dist', src: ['**'], dest: '/usr/local/Cellar/nginx/1.4.2/html/'},
-                { expand: true, cwd: 'src',  src: ['**'], dest: '/usr/local/Cellar/nginx/1.4.2/html/src'} ] }
+                { expand: true, cwd: 'src',  src: ['blog/**'],  dest: 'dist/'} ] }
         },
 
         watch: { less:    { files: ['src/**/*.less'], tasks: ['less'],           options: { spawn: false } },
