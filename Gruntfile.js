@@ -4,21 +4,21 @@ module.exports = function (grunt) {
 
         concat: { options: { separator: ';' },
             dist: { src: [
-                    'src/js/vendor/jquery-1.10.2.min.js',
-                    'src/js/vendor/angular.js',
-                    'src/js/vendor/angular-route.js',
-                    'src/js/vendor/showdown.js',
-                    'src/js/vendor/highlight.pack.js',
-                    'src/js/vendor/underscore.js',
-                    'src/js/vendor/underscore.string.js',
-                    'src/js/app.js',
-                    'src/js/routes.js',
-                    'src/js/services/showdown.js',
-                    'src/js/services/resource-cache.js',
-                    'build/js/app.templates.js',
-                    'src/js/controllers.js',
-                    'src/js/directives/*.js'
-                ], dest: 'dist/js/<%= pkg.name %>.js' } },
+                'src/js/vendor/jquery-1.10.2.min.js',
+                'src/js/vendor/angular.min.js',
+                'src/js/vendor/angular-route.min.js',
+                'src/js/vendor/underscore.min.js',
+                'src/js/vendor/underscore.string.js',
+                'src/js/vendor/showdown.js',
+                'src/js/vendor/highlight.pack.js',
+                'src/js/app.js',
+                'src/js/routes.js',
+                'src/js/services/showdown.js',
+                'src/js/services/resource-cache.js',
+                'build/js/app.templates.js',
+                'src/js/controllers.js',
+                'src/js/directives/*.js'
+            ], dest: 'dist/js/<%= pkg.name %>.js' } },
 
         copy: {
             main: { files: [
