@@ -5,12 +5,14 @@ describe('controller specs', function () {
     var $httpBackend;
     var expectedUrl = "blog/posts/2013-10-24-test";
 
+    beforeEach(module('ngBlog.services'));
     beforeEach(module('ngBlog.controllers'));
 
     beforeEach(inject(function ($injector, $rootScope, $controller, _$httpBackend_) {
         $scope = $rootScope.$new();
         $httpBackend = _$httpBackend_;
         $httpBackend.when('GET', expectedUrl + '.md').respond("#This is a test headline");
+        $httpBackend.when('GET', expectedUrl + '.json').respond('{ "test": "test"}');
         $controller('blogCtrl', { $scope: $scope, $routeParams: $routeParams });
     }));
 
@@ -22,6 +24,7 @@ describe('controller specs', function () {
     it('should create expected "url" and issue GET request', function () {
         expect($scope.url).toBe(expectedUrl);
         $httpBackend.expectGET(expectedUrl+ '.md');
+        $httpBackend.expectGET(expectedUrl+ '.json');
         $httpBackend.flush();
     });
 });
