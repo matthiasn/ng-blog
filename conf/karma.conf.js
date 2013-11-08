@@ -8,11 +8,11 @@ module.exports = function (config) {
             'src/js/vendor/showdown.js',
             'test/lib/angular-mocks.js',
             'src/js/app.js',
+            'build/js/app.templates.js',
             'src/js/routes.js',
             'src/js/services/showdown.js',
             'src/js/services/resource-cache.js',
             'src/js/controllers.js',
-            'build/js/app.templates.js',
             'src/js/directives/*.js',
             'test/unit/**/*.js'
         ],

@@ -13,8 +13,8 @@
                         elem.empty().append($compile(showdown.makeHtml($scope.md))($scope));
                     }
                 };
-                $scope.$watch("md.data",  render);
-                $scope.$watch("config.data", render);
+                $scope.$watch("md",  render);
+                $scope.$watch("config", render);
             }
         }
     });

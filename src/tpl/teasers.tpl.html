@@ -1,5 +1,5 @@
 <div class="overview">
-    <article class="teaser" data-ng-repeat="teaser in config.data.teasers">
+    <article class="teaser" data-ng-repeat="teaser in config.teasers">
         <time>{{ teaser.date }}</time>
         <h2><a href="{{ teaser.href }}"> {{ teaser.title }}</a></h2>
         <p markdown md="teaser.text" config="config">{{ teaser.text }}</p>
