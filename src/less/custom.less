@@ -40,6 +40,16 @@
 @pre-color:            @gray-darker;
 @pre-border-color:     #CCC;
 
+@article-time-color:   #777;
+@article-link-bg:      white;
+@article-link-bg-hov:  #d3d3d3;
+
+@teaser-bg:            #eee;
+
+@snippet-marker-bg:    rgba(128, 200, 0, 0.5);
+@snippet-header-color: white;
+@snippet-header-bg:    #888;
+
 @grid-columns:          12;
 @grid-gutter-width:     30px;
 @grid-float-breakpoint: 768px;
@@ -92,17 +102,28 @@ img { max-width: 100%; }
 .navbar-brand { font-weight: 600; }
 
 article.teaser {
-  background-color: #eee;
+  background-color: @teaser-bg;
   padding: 10px;
-
   margin-bottom: 20px;
 
+  h2 {
+    margin-top: 10px;
+  }
+
+  time {
+    font-family: @headings-font-family;
+    color:       @article-time-color;
+  }
+
   .read-on {
-    margin: 20px 0 15px 0;
+    margin: 20px 0 10px 0;
 
     a {
-      background-color: #d3d3d3;
+      background-color: @article-link-bg;
       padding: 8px 12px;
+    }
+    a:hover {
+      background-color: @article-link-bg-hov;
     }
   }
 }

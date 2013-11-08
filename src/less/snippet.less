@@ -23,13 +23,12 @@
     font-family: @font-family-monospace;
     right: 0;
     position: absolute;
-    background: rgba(128, 200, 0, 0.5);
+    background: @snippet-marker-bg;
   }
 
   .comment-banner {
     left: 0;
     z-index: 11;
-    font-family: @font-family-monospace;
     right: 0;
     position: absolute;
     text-align: center;
@@ -40,6 +39,7 @@
       width: auto;
       background: rgba(240, 240, 240, 0.85);
       padding: 5px 10px 7px 10px;
+      font-size: @font-size-base;
       font-family: @font-family-sans-serif;
       font-weight: bold;
       text-shadow: 0 0 10px white;
@@ -68,8 +68,8 @@
   .code-container { height: auto; position: relative; }
 
   .code-header {
-    background-color: #888;
-    color: #ffffff;
+    background-color: @snippet-header-bg;
+    color: @snippet-header-color;
     font-family: @font-family-monospace;
     padding: 4px 4px 4px 10px;
     font-weight: bold;
