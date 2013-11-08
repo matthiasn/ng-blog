@@ -1,0 +1,10 @@
+<div class="overview">
+    <article class="teaser" data-ng-repeat="teaser in config.data.teasers">
+        <p>{{ teaser.date }}</p>
+        <h2><a href="{{ teaser.href }}"> {{ teaser.title }}</a></h2>
+        <p markdown md="teaser.text" config="config">{{ teaser.text }}</p>
+        <div class="read-on">
+            <a href="{{ teaser.href }}">Read on <span class="fa fa-arrow-right"></span></a>
+        </div>
+    </article>
+</div>

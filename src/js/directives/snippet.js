@@ -21,7 +21,9 @@ angular.module('ngBlog.directives')
             scope: { code: "=code" },
             replace: true,
             link: function ($scope, elem) {
-                var render = function () { elem.html(hljs.highlightAuto($scope.code).value); };
+                var render = function () {
+                    if ($scope.code) { elem.html(hljs.highlightAuto($scope.code).value); }
+                };
                 $scope.$watch("code", render);
             }
         }

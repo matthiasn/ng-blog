@@ -5,7 +5,7 @@ describe('spec for markdown directives', function () {
     var $scope;
     beforeEach(inject(function ($rootScope) {
         $scope = $rootScope.$new();
-        $scope.markdown = { data: "#TEST HEADLINE" };
+        $scope.markdown = "#TEST HEADLINE";
     }));
 
     describe('when provided with valid markdown', function () {

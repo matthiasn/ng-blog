@@ -9,7 +9,9 @@
             scope: { md: "=md", config: "=config" },
             link: function ($scope, elem) {
                 var render = function () {
-                    elem.empty().append($compile(showdown.makeHtml($scope.md.data))($scope));
+                    if ($scope.md) {
+                        elem.empty().append($compile(showdown.makeHtml($scope.md))($scope));
+                    }
                 };
                 $scope.$watch("md.data",  render);
                 $scope.$watch("config.data", render);
