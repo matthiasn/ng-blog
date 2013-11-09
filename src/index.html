@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
+<head>
     <meta charset="utf-8">
     <title>ng-blog</title>
 
@@ -11,8 +11,10 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="fragment" content="!">
 
+    <style type="text/css">.navbar-brand {color: white;}</style>
+
     <script src="//use.typekit.net/rco1jij.js"></script>
-    <script>try{Typekit.load();}catch(e){}</script>
+    <script>try {Typekit.load();} catch (e) {}</script>
 
     <!--(if target dev)><!-->
     <link rel="stylesheet/less" href="less/custom.less">
@@ -22,43 +24,42 @@
     <!--(if target dist)>
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <!(endif)-->
-
 </head>
-  <body data-ng-app="ngBlog">
-    <div data-ng-controller="blogCtrl">
+<body data-ng-app="ngBlog">
+<div data-ng-controller="blogCtrl">
 
-        <div class="navbar navbar-default navbar-static-top navbar-inverse transparent" role="navigation">
-            <div class="container">
-                <a class="navbar-brand" href="#">ng-blog</a>
-            </div>
+    <div class="navbar navbar-default navbar-static-top navbar-inverse transparent" role="navigation">
+        <div class="container">
+            <a class="navbar-brand" href="#">ng-blog</a>
         </div>
-
-        <div class="container" ng-view></div>
-
     </div>
-    <!--(if target dev)><!-->
-    <script src="bower_components/jquery/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/underscore/underscore.js"></script>
-    <script src="bower_components/underscore.string/lib/underscore.string.js"></script>
-    <script src="bower_components/showdown/src/showdown.js"></script>
-    <script src="js/vendor/highlight.pack.js"></script>
-    <script src="js/app.js"></script>
-    <script src="js/routes.js"></script>
-    <script src="js/services/showdown.js"></script>
-    <script src="js/services/resource-cache.js"></script>
-    <script src="js/services/resource-reload.js"></script>
-    <script src="js/controllers.js"></script>
-    <script src="js/directives/article.js"></script>
-    <script src="js/directives/markdown.js"></script>
-    <script src="js/directives/teasers.js"></script>
-    <script src="js/directives/snippet.js"></script>
-    <script src="js/directives/image.js"></script>
-    <!--<!(endif)-->
 
-    <!--(if target dist)>
-    <script src="js/ng-blog.js"></script>
-    <!(endif)-->
-  </body>
+    <div class="container" ng-view></div>
+</div>
+
+<!--(if target dev)><!-->
+<script src="bower_components/jquery/jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/underscore/underscore.js"></script>
+<script src="bower_components/underscore.string/lib/underscore.string.js"></script>
+<script src="bower_components/showdown/src/showdown.js"></script>
+<script src="js/vendor/highlight.pack.js"></script>
+<script src="js/app.js"></script>
+<script src="js/routes.js"></script>
+<script src="js/services/showdown.js"></script>
+<script src="js/services/resource-cache.js"></script>
+<script src="js/services/resource-reload.js"></script>
+<script src="js/controllers.js"></script>
+<script src="js/directives/article.js"></script>
+<script src="js/directives/markdown.js"></script>
+<script src="js/directives/teasers.js"></script>
+<script src="js/directives/snippet.js"></script>
+<script src="js/directives/image.js"></script>
+<!--<!(endif)-->
+
+<!--(if target dist)>
+<script src="js/ng-blog.js"></script>
+<!(endif)-->
+</body>
 </html>
