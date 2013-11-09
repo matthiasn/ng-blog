@@ -24,7 +24,7 @@ describe('spec for teasers directive', function () {
     beforeEach(module('ngBlog.services'));
     beforeEach(module('ngBlog.directives'));
     var $scope;
-    beforeEach(inject(function ($rootScope, $templateCache) {
+    beforeEach(inject(function ($rootScope) {
 
         $scope = $rootScope.$new();
         $scope.config = {

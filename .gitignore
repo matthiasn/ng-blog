@@ -6,3 +6,4 @@ build
 src/blog
 src/blog2
 ng-blog.iml
+src/bower_components/

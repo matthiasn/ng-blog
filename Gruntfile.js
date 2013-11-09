@@ -4,12 +4,12 @@ module.exports = function (grunt) {
 
         concat: { options: { separator: ';' },
             dist: { src: [
-                'src/js/vendor/jquery-1.10.2.min.js',
-                'src/js/vendor/angular.min.js',
-                'src/js/vendor/angular-route.min.js',
-                'src/js/vendor/underscore.min.js',
-                'src/js/vendor/underscore.string.js',
-                'src/js/vendor/showdown.js',
+                'src/bower_components/jquery/jquery.min.js',
+                'src/bower_components/angular/angular.min.js',
+                'src/bower_components/angular-route/angular-route.min.js',
+                'src/bower_components/underscore/underscore.min.js',
+                'src/bower_components/underscore.string/dist/underscore.string.min.js',
+                'src/bower_components/showdown/compressed/showdown.js',
                 'src/js/vendor/highlight.pack.js',
                 'src/js/app.js',
                 'src/js/routes.js',
