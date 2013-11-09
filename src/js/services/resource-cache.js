@@ -7,7 +7,14 @@ angular.module('ngBlog.services').factory('resourceCache', function ($http) {
     var cache = {};
 
     var loadResource = function(url) {
-        $http({method: 'GET', url: url, cache: false}).then(function (res) { cache[url].data = res.data; });
+        $http({method: 'GET', url: url, cache: false}).then(function (res) {
+            cache[url].data = res.data;
+            if (res.data.hasOwnProperty("preload")) {
+                _.forEach(res.data.preload, function(item) {
+                    exports.getResource(item, _.str.endsWith("json"));
+                });
+            }
+        });
     };
 
     exports.getResource = function(url, expectObject) {
