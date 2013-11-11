@@ -34,18 +34,20 @@ module.exports = function (grunt) {
         karma:       { unit:    { configFile: 'conf/karma.conf.js', singleRun: true } },
         less:        { dist:    { files: { "dist/css/main.css": "src/less/custom.less" } } },
         ngtemplates: { ngBlog:  { cwd: 'src', src: ['views/**.html', 'tpl/**.html'], dest: 'build/js/app.templates.js' } },
-
-        compress: { main: { options: { mode: 'gzip' }, expand: true,
-            src: ['dist/**/*.js', 'dist/**/*.css', 'dist/**/*.html', 'dist/**/*.json', 'dist/**/*.md',
-                  'dist/**/*.svg', 'dist/**/*.ttf', 'dist/**/*.otf'], dest: '.' } }
+        cssmin:      { minify:  { expand: true,  cwd: 'dist/css/', src: 'main.css', dest: 'dist/css/', ext: '.min.css',
+                                  options: { keepSpecialComments: 0 } } },
+        compress:    { main: { options: { mode: 'gzip' }, expand: true,
+                       src: ['dist/**/*.js', 'dist/**/*.css', 'dist/**/*.html', 'dist/**/*.json', 'dist/**/*.md',
+                             'dist/**/*.svg', 'dist/**/*.ttf', 'dist/**/*.otf'], dest: '.' } }
     });
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-targethtml');
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-angular-templates');
     grunt.loadNpmTasks('grunt-contrib-compress');
-    grunt.registerTask('dist', ['ngtemplates', 'karma', 'less', 'concat', 'targethtml', 'copy', 'compress']);
+    grunt.registerTask('dist', ['ngtemplates', 'karma', 'less', 'concat', 'targethtml', 'copy', 'cssmin', 'compress']);
 };
