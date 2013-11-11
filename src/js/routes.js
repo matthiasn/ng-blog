@@ -1,6 +1,6 @@
 'use strict';
 /** routes configuration for dist (no editing) */
-angular.module('ngBlog').config(function ($locationProvider, $routeProvider) {
+angular.module('ngBlog').config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
     $locationProvider.html5Mode(true);
     $locationProvider.hashPrefix('!');
 
@@ -17,4 +17,4 @@ angular.module('ngBlog').config(function ($locationProvider, $routeProvider) {
                 controller: 'blogCtrl'
             })
             .otherwise({ redirectTo: '/' });
-    });
+    }]);

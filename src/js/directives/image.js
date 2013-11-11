@@ -5,7 +5,7 @@
  *  Element type not important, enclosing will be replaced
  */
 angular.module('ngBlog.directives')
-    .directive('image', function ($timeout) {
+    .directive('image', ['$timeout', function ($timeout) {
         return {
             restrict: 'EA',
             scope: { image: "=image" },
@@ -32,4 +32,4 @@ angular.module('ngBlog.directives')
                 $scope.src = file[0] + suffix + '.' + file[1];
             }
         }
-    });
+    }]);

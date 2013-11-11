@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('ngBlog.controllers', [])
-    .controller('blogCtrl', function ($scope, $routeParams, resourceCache) {
+    .controller('blogCtrl', ['$scope', '$routeParams', 'resourceCache', function ($scope, $routeParams, resourceCache) {
         var r = $routeParams;
         if (r.cat) {
             $scope.url = r.cat;
@@ -14,4 +14,4 @@ angular.module('ngBlog.controllers', [])
             $scope.markdown = resourceCache.getResource($scope.url + ".md", false);
             $scope.config = resourceCache.getResource($scope.url + ".json", true);
         }
-    });
+    }]);

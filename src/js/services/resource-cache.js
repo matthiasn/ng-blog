@@ -2,7 +2,7 @@
 
 /** resource cache service, loads resources once and then provides cached version
  *  also allows refreshing specific resources */
-angular.module('ngBlog.services').factory('resourceCache', function ($http) {
+angular.module('ngBlog.services').factory('resourceCache', ['$http', function ($http) {
     var exports = {};
     var cache = {};
 
@@ -10,7 +10,7 @@ angular.module('ngBlog.services').factory('resourceCache', function ($http) {
         $http({method: 'GET', url: url, cache: false}).then(function (res) {
             cache[url].data = res.data;
             if (res.data.hasOwnProperty("preload")) {
-                _.forEach(res.data.preload, function(item) { exports.getResource(item, _.str.endsWith("json")); });
+                _.each(res.data.preload, function(item) { exports.getResource(item, _.str.endsWith("json")); });
             }
         });
     };
@@ -27,4 +27,4 @@ angular.module('ngBlog.services').factory('resourceCache', function ($http) {
     exports.refresh = function(url) { loadResource(url); };
 
     return exports;
-});
+}]);

@@ -1,7 +1,7 @@
 'use strict';
 /** Codeblock directive, highlights syntax using highlight.js */
 angular.module('ngBlog.directives')
-    .directive('codeblock', function (resourceCache) {
+    .directive('codeblock', ['resourceCache', function (resourceCache) {
         return {
             restrict: 'EA',
             scope: { src: "=src" },
@@ -14,7 +14,7 @@ angular.module('ngBlog.directives')
                 $scope.$watch("code.data", function() { hljs.highlightBlock(elem.find('pre code')[0]) });
             }
         }
-    })
+    }])
     .directive('hljs', function() {
         return {
             restrict: 'A',
@@ -28,7 +28,7 @@ angular.module('ngBlog.directives')
             }
         }
     })
-    .directive('snippet', function($timeout, resourceCache) {
+    .directive('snippet', ['$timeout', 'resourceCache', function($timeout, resourceCache) {
         return {
             restrict: 'EA',
             scope: { snippet: "=snippet" },
@@ -103,4 +103,4 @@ angular.module('ngBlog.directives')
 
             }
         }
-    });
+    }]);
