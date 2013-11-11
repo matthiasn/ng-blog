@@ -26,7 +26,7 @@ module.exports = function (grunt) {
         concurrent:  { dev:     { tasks: ['watch', 'karma:unit'], options: { logConcurrentOutput: true } } },
         ngtemplates: { ngBlog:  { cwd: 'src', src: ['views/**.html', 'tpl/**.html'], dest: 'build/js/app.templates.js' } },
         jshint:      { options: { jshintrc: '.jshintrc' },
-                       files:   { src: ['Gruntfile.js', 'src/js/**/*.js', '!src/js/vendor/*.js'] } },
+                       files:   { src: ['Gruntfile.js', 'src/js/**/*.js', '!src/js/vendor/*.js', 'scripts/server.js'] } },
         cssmin:      { minify:  { expand: true,  cwd: 'dist/css/', src: 'main.css', dest: 'dist/css/', ext: '.min.css',
                                   options: { keepSpecialComments: 0 } } },
         compress:    { main:    { options: { mode: 'gzip' }, expand: true,

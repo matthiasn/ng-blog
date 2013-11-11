@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /**
  *  Server for ng-blog in authoring mode
  *
@@ -11,22 +12,22 @@
  **/
 'use strict';
 
-var chok = require('chokidar');
-var SSE  = require('sse');
-var http = require('http');
-var url  = require("url");
-var path = require("path");
-var fs   = require("fs");
-var port = process.argv[2] || 8888;
+var chok   = require('chokidar');
+var SSE    = require('sse');
+var http   = require('http');
+var urlModule = require("url");
+var path   = require("path");
+var fs     = require("fs");
+var port   = process.argv[2] || 8888;
+
+process.chdir(path.resolve(process.cwd(), 'src'));
 
 var watcher = chok.watch('blog', { ignored: /^\./, persistent: true });
 var lessWatcher = chok.watch('less', { ignored: /^\./, persistent: true });
 
 /** basic web server, serving static files */
 var fileServer = http.createServer(function(request, response) {
-    var filename = path.join(process.cwd(), url.parse(request.url).pathname);
-
-    console.log(request.url);
+    var filename = path.join(process.cwd(), urlModule.parse(request.url).pathname);
 
     fs.exists(filename, function(exists) {
         if(!exists) {
@@ -45,7 +46,7 @@ var fileServer = http.createServer(function(request, response) {
             return;
         }
 
-        if (fs.statSync(filename).isDirectory()) filename = 'index.html';
+        if (fs.statSync(filename).isDirectory()) { filename = 'index.html'; }
 
         fs.readFile(filename, "binary", function(err, file) {
             if(err) {
