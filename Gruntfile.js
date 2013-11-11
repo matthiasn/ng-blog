@@ -18,34 +18,34 @@ module.exports = function (grunt) {
             'build/js/app.templates.js',
             'src/js/directives/*.js' ]
                 } } },
-        copy: {
-            main: { files: [
-                { expand: true, cwd: 'src',  src: ['fonts/**'], dest: 'dist/'},
-                { expand: true, cwd: 'src',  src: ['blog/**'],  dest: 'dist/'} ] }
-        },
-
-        watch: { less:    { files: ['src/**/*.less'], tasks: ['less'],           options: { spawn: false } },
-                 scripts: { files: ['src/**/*.js'],   tasks: ['karma','concat'], options: { spawn: false } },
-                 dist:    { files: ['dist/**'],   tasks: ['copy:nginx'],         options: { spawn: true } }
-        },
+        watch:       { jshint:  { files: ['src/**/*'], tasks: ['jshint'], options: { spawn: false } } },
         targethtml:  { dist:    { files: { 'dist/index.html': 'src/index.html'} } },
-        karma:       { unit:    { configFile: 'conf/karma.conf.js', singleRun: true } },
+        karma:       { unit:    { configFile: 'conf/karma.conf.js', singleRun: false },
+                       dist:    { configFile: 'conf/karma.conf.js', singleRun: true }},
         less:        { dist:    { files: { "dist/css/main.css": "src/less/custom.less" } } },
+        concurrent:  { dev:     { tasks: ['watch', 'karma:unit'], options: { logConcurrentOutput: true } } },
         ngtemplates: { ngBlog:  { cwd: 'src', src: ['views/**.html', 'tpl/**.html'], dest: 'build/js/app.templates.js' } },
+        jshint:      { options: { jshintrc: '.jshintrc' },
+                       files:   { src: ['Gruntfile.js', 'src/js/**/*.js', '!src/js/vendor/*.js'] } },
         cssmin:      { minify:  { expand: true,  cwd: 'dist/css/', src: 'main.css', dest: 'dist/css/', ext: '.min.css',
                                   options: { keepSpecialComments: 0 } } },
-        compress:    { main: { options: { mode: 'gzip' }, expand: true,
-                       src: ['dist/**/*.js', 'dist/**/*.css', 'dist/**/*.html', 'dist/**/*.json', 'dist/**/*.md',
-                             'dist/**/*.svg', 'dist/**/*.ttf', 'dist/**/*.otf'], dest: '.' } }
+        compress:    { main:    { options: { mode: 'gzip' }, expand: true,
+                       src:     [ 'dist/**/*.js', 'dist/**/*.css', 'dist/**/*.html', 'dist/**/*.json', 'dist/**/*.md',
+                                  'dist/**/*.svg', 'dist/**/*.ttf', 'dist/**/*.otf' ], dest: '.' } },
+        copy:        { main:    { files: [ { expand: true, cwd: 'src',  src: ['fonts/**'], dest: 'dist/'},
+                                           { expand: true, cwd: 'src',  src: ['blog/**'],  dest: 'dist/'} ] } }
     });
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-targethtml');
     grunt.loadNpmTasks('grunt-karma');
+    grunt.loadNpmTasks('grunt-concurrent');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-angular-templates');
     grunt.loadNpmTasks('grunt-contrib-compress');
-    grunt.registerTask('dist', ['ngtemplates', 'karma', 'less', 'uglify', 'targethtml', 'copy', 'cssmin', 'compress']);
+    grunt.registerTask('dist', ['ngtemplates', 'jshint', 'karma:dist', 'less', 'uglify', 'targethtml', 'copy', 'cssmin', 'compress']);
+    grunt.registerTask('default', ['concurrent:dev']);
 };

@@ -16,5 +16,5 @@
                 $scope.$watch("md",  render);
                 $scope.$watch("config", render);
             }
-        }
+        };
     }]);

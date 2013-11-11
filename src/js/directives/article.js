@@ -8,8 +8,6 @@ angular.module('ngBlog.directives')
             templateUrl: "tpl/article.tpl.html",
             link: function ($scope, elem, attrs) {
                 $scope.lines = [];
-
-
             }
-        }
+        };
     });

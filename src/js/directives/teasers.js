@@ -7,5 +7,5 @@
             restrict: 'A',
             scope: { config: "=config" },
             templateUrl: "tpl/teasers.tpl.html"
-        }
+        };
     });

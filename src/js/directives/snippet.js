@@ -1,19 +1,19 @@
 'use strict';
-/** Codeblock directive, highlights syntax using highlight.js */
+/** Directive for animated code blocks, highlights syntax using highlight.js */
 angular.module('ngBlog.directives')
     .directive('codeblock', ['resourceCache', function (resourceCache) {
         return {
             restrict: 'EA',
             scope: { src: "=src" },
             replace: true,
-            template: "<div class='codeblock'>"
-                + "<pre><code class='language-{{ mode }}'>{{ code.data }}</code></pre><div class='marker'></div></div>",
+            template: "<div class='codeblock'>" +
+                "<pre><code class='language-{{ mode }}'>{{ code.data }}</code></pre><div class='marker'></div></div>",
             link: function ($scope, elem, attrs) {
                 $scope.code = resourceCache.getResource($scope.src, false);
                 $scope.mode = attrs.mode;
-                $scope.$watch("code.data", function() { hljs.highlightBlock(elem.find('pre code')[0]) });
+                $scope.$watch("code.data", function() { hljs.highlightBlock(elem.find('pre code')[0]); });
             }
-        }
+        };
     }])
     .directive('hljs', function() {
         return {
@@ -26,7 +26,7 @@ angular.module('ngBlog.directives')
                 };
                 $scope.$watch("code", render);
             }
-        }
+        };
     })
     .directive('snippet', ['$timeout', 'resourceCache', function($timeout, resourceCache) {
         return {
@@ -72,7 +72,7 @@ angular.module('ngBlog.directives')
                             else { return ((line - 1.5 - lineOffset) * lineHeight) + offset; }
                         }
 
-                        function getHeight(lines) { return lineHeight * lines + 1 }
+                        function getHeight(lines) { return lineHeight * lines + 1; }
                         function curr() { return currentMarker % $scope.snippet.markers.length; }
 
                         function setMarker() {
@@ -94,7 +94,7 @@ angular.module('ngBlog.directives')
                         $scope.prev = function () {
                             currentMarker--;
                             setMarker();
-                        }
+                        };
                     });
 
 
@@ -102,5 +102,5 @@ angular.module('ngBlog.directives')
                 });
 
             }
-        }
+        };
     }]);

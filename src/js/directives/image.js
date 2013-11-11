@@ -31,5 +31,5 @@ angular.module('ngBlog.directives')
                 }
                 $scope.src = file[0] + suffix + '.' + file[1];
             }
-        }
+        };
     }]);
