@@ -20,12 +20,13 @@ var fs   = require("fs");
 var port = process.argv[2] || 8888;
 
 var watcher = chok.watch('blog', { ignored: /^\./, persistent: true });
+var lessWatcher = chok.watch('less', { ignored: /^\./, persistent: true });
 
 /** basic web server, serving static files */
 var fileServer = http.createServer(function(request, response) {
     var filename = path.join(process.cwd(), url.parse(request.url).pathname);
 
-    console.log(request.url)
+    console.log(request.url);
 
     fs.exists(filename, function(exists) {
         if(!exists) {
@@ -66,8 +67,10 @@ fileServer.listen(parseInt(port, 10), function () {
     var sse = new SSE(fileServer);
     sse.on('connection', function (client) { // register watcher when connection starts
         watcher.on('change', function (path) { client.send(path); }); // send path of changed file
+        lessWatcher.on('change', function (path) { client.send(path); }); // send path of changed file
     });
     sse.on('close', function() {
         watcher.close();
+        lessWatcher.close();
     });
 });
