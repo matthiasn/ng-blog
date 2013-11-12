@@ -1,0 +1,28 @@
+article.teaser {
+  background-color: @teaser-bg;
+  padding: 12px;
+  margin-bottom: 20px;
+
+  h2 { margin-top: 10px; }
+
+  time {
+    font-family: @headings-font-family;
+    color:       @article-time-color;
+    font-weight: @article-time-weight;
+    .fa-calendar {
+      position: relative;
+      top: -2px;
+    }
+  }
+
+  .read-on {
+    margin: 20px 0 10px 0;
+
+    a {
+      font-weight: @font-weight-link;
+      background-color: @article-link-bg;
+      padding: 8px 12px;
+    }
+    a:hover { background-color: @article-link-bg-hov; }
+  }
+}

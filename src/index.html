@@ -25,22 +25,23 @@
 </head>
 <body data-ng-app="ngBlog">
 
-
-<div class="container">
+<div class="header-container">
     <header class="site-header cf" role="banner">
         <div class="site-logo">
             NG-BLOG
         </div>
         <ul class="site-nav inline-block-list">
-            <li><a href="https://github.com/matthiasn/ng-blog" data-ga-category="Outbound links" data-ga-action="Nav click" data-ga-label="Source code">Source code</a></li>
-            <li><a href="https://github.com/matthiasn" data-ga-category="Outbound links" data-ga-action="Nav click" data-ga-label="Docs">Docs</a></li>
-            <li><a href="https://github.com/matthiasn" data-ga-category="Outbound links" data-ga-action="Nav click" data-ga-label="Other projects">Other projects</a></li>
+            <li><a href="https://github.com/matthiasn/ng-blog" target="_blank" data-ga-category="Outbound links"
+                   data-ga-action="Nav click" data-ga-label="Source code">Source code</a></li>
+            <li><a href="blog" data-ga-category="Outbound links" data-ga-action="Nav click" data-ga-label="Blog">Docs</a></li>
+            <li><a href="https://github.com/matthiasn" target="_blank" data-ga-category="Outbound links"
+                   data-ga-action="Nav click" data-ga-label="Other projects">Other projects</a></li>
         </ul>
     </header><!-- end site-header -->
 
     <div class="site-promo">
-        <h1>The world’s most advanced blogging engine ;-)</h1>
-        <p class="description">ng-blog helps create a <strong>super-fast</strong> <strong>self-hosted</strong>, and <strong>adaptable</strong> blog.</p>
+        <h1>The world’s most advanced blogging engine</h1>
+        <p class="description">ng-blog helps create a <strong>super-fast</strong>, <strong>self-hosted</strong>, and <strong>adaptable</strong> blog.</p>
         </div>
     </div><!-- end site-promo -->
 </div>
@@ -51,7 +52,7 @@
             <div ng-view></div>
             <aside>
                 <img src="mn.jpg">
-                <h3>about me</h3>
+                <h3>About me</h3>
                 <p>Hello everyone. My name is Matthias Nehlsen and I am exploring functional programming, data visualization
                     and real-time information processing.</p>
             </aside>

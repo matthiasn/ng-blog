@@ -1,0 +1,68 @@
+.header-container {
+  max-width: 600px;
+  padding: 0 10px;
+  margin: 0 auto;
+}
+
+.site-header { padding-top: 30px; }
+
+.site-logo {
+  //float: left;
+  text-align: center;
+  color: darken(orange, 3%);
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.site-nav {
+  //float: right;
+  text-align: center;
+  margin: 7px 0 0;
+  list-style: none;
+  line-height: 32px;
+  a {
+    color: @brand-primary;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  a:hover, .site-nav a:focus, .site-nav a:active {
+    color: #fff;
+  }
+}
+
+.site-promo {
+  //padding-top: 1em;
+  padding-bottom: 2em;
+  text-align: center;
+
+  h1 { color: #ddd; }
+  .description {
+    font-size: 1.25em;
+    color: #ddd
+  }
+}
+
+.site-content {
+  overflow: hidden;
+  padding: 1em 0 5em;
+  color: #333;
+  background: #fff;
+}
+
+.inline-block-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  li {
+    display: inline-block;
+    padding: 0;
+    margin: 0 0 0 1.5em;
+    vertical-align: top;
+  }
+
+  li:first-child { margin-left: 0; }
+}
