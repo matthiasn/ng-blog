@@ -44,7 +44,7 @@ angular.module('ngBlog.directives')
                         $scope.marker = { top: 0, height: 0 };
                         $scope.commentBanner = { top: 0 };
                         var lineHeight = parseInt(elem.find('pre').css('line-height'));
-                        var offset = 5;
+                        var offset = 0;
                         var timeoutPromise;
                         var currentMarker = -1;
                         var lineOffset = $scope.snippet.fromLine;
@@ -68,8 +68,8 @@ angular.module('ngBlog.directives')
                             var line = $scope.snippet.markers[curr()].line;
                             var height = $scope.snippet.markers[curr()].height;
 
-                            if (line - lineOffset < 3) { return ((line + 0.3 + height - lineOffset) * lineHeight) + offset; }
-                            else { return ((line - 1.5 - lineOffset) * lineHeight) + offset; }
+                            if (line - lineOffset < 3) { return ((line + 0.7 + height - lineOffset) * lineHeight) + offset; }
+                            else { return ((line - 1.7 - lineOffset) * lineHeight) + offset; }
                         }
 
                         function getHeight(lines) { return lineHeight * lines + 1; }

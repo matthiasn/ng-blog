@@ -7,47 +7,28 @@
  * This approach is easier to maintain than modifications to the original Bootstrap LESS files...
  */
 
-  // Bootstrap Core variables and mixins
-@import "../bower_components/bootstrap/less/variables.less";
-@import "../bower_components/bootstrap/less/mixins.less";
-
-  // Bootstrap Reset
-@import "../bower_components/bootstrap/less/normalize.less";
-@import "../bower_components/bootstrap/less/print.less";
-
-  // Bootstrap Core CSS
-@import "../bower_components/bootstrap/less/scaffolding.less";
-@import "../bower_components/bootstrap/less/type.less";
-@import "../bower_components/bootstrap/less/code.less";
-@import "../bower_components/bootstrap/less/grid.less";
-@import "../bower_components/bootstrap/less/forms.less";
-@import "../bower_components/bootstrap/less/buttons.less";
-
-  // Bootstrap Components
-@import "../bower_components/bootstrap/less/navs.less";
-@import "../bower_components/bootstrap/less/navbar.less";
-
-
 @import "code-highlight.less";
-@import "snippet.less";
 @import "font-awesome/font-awesome-custom.less";
+@import "normalize.less";
+@import "snippet.less";
 
 // Brand colors -> used for example for links (naming convention from Bootstrap)
 @brand-primary: #009ACD;
 
 // Scaffolding
-@text-color: @gray-darker;
+@text-color: #222;
 
 // Typography
 @font-face { font-family: Inconsolata; src: url('../fonts/Inconsolata.otf'); }
 @font-family-sans-serif: "tablet-gothic", "Helvetica Neue", Helvetica, Arial, sans-serif;
 @font-family-monospace:  "Inconsolata", Monaco, Menlo, Consolas, "Courier New", monospace;
 
+@font-size-base: 14px;
 @font-weight-base:     300;
-@font-weight-link:     400;
+@font-weight-link:     600;
 @font-weight-strong:   600;
 
-@headings-font-family: "tablet-gothic-compressed", @font-family-base;
+@headings-font-family: "tablet-gothic-compressed", @font-family-sans-serif;
 @headings-font-weight: 600;
 @headings-line-height: 1.1;
 
@@ -56,7 +37,7 @@
 @border-radius-small:  0px;
 
 @pre-bg:               rgba(0,0,0,0);
-@pre-color:            @gray-darker;
+@pre-color:            @text-color;
 @pre-border-color:     #CCC;
 
 @article-time-color:   #888;
@@ -74,24 +55,26 @@
 @grid-gutter-width:     30px;
 @grid-float-breakpoint: 768px;
 
-@navbar-inverse-bg: #333;
-@navbar-inverse-brand-color: lightgray;
-
-@fa-font-path: "/fonts";
-
 body {
   font-weight: @font-weight-base;
+  font-family: @font-family-sans-serif;
   padding-bottom: 50px;
   text-rendering: optimizeLegibility;
+  font-size: @font-size-base;
+  background-color: #222;
+  display: block;
 }
 
 a {
   font-weight: @font-weight-link;
+  text-decoration: none;
+  color: @brand-primary;
   &:hover, &:focus { text-decoration: none; }
 }
 
 h1, h2, h3 {
-  margin-top: @line-height-computed;
+  margin-top: 1em;
+  font-family: @headings-font-family;
   a {
     color: @text-color;
     font-weight: 600;
@@ -106,7 +89,7 @@ blockquote {
 img { max-width: 100%; }
 
 @media screen and (max-width: 480px) {
-  p { font-size: 1.2em; }
+  p { font-size: 1em; }
 }
 
 @media screen and (max-width: 320px) {
@@ -118,8 +101,6 @@ img { max-width: 100%; }
   50% {box-shadow: 1px 1px 20px rgba(50, 50, 100, 0.75);}
   100% {box-shadow: 1px 1px 15px rgba(50, 50, 100, 0.75);}
 }
-
-.navbar-brand { font-weight: 600; }
 
 article.teaser {
   background-color: @teaser-bg;
@@ -140,6 +121,7 @@ article.teaser {
     margin: 20px 0 10px 0;
 
     a {
+      font-weight: @font-weight-link;
       background-color: @article-link-bg;
       padding: 8px 12px;
     }
@@ -147,4 +129,242 @@ article.teaser {
       background-color: @article-link-bg-hov;
     }
   }
+}
+
+figcaption {
+  font-weight: 600;
+}
+
+time {
+  .fa-calendar {
+    position: relative;
+    top: -1px;
+  }
+}
+
+.container {
+  max-width: 960px;
+  padding: 0 10px;
+  margin: 0 auto;
+}
+
+::-moz-selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+::selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+img {
+  vertical-align: middle;
+}
+
+textarea {
+  resize: vertical;
+}
+
+.footer-container {
+  color: #eee;
+  text-align: center;
+}
+
+/* ==============
+    MOBILE: Menu
+   ============== */
+
+nav ul {
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  display: block;
+  margin-bottom: 10px;
+  padding: 15px 0;
+
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+
+  color: white;
+  background: #678;
+}
+
+nav a:hover,
+nav a:visited {
+  color: white;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+@media only screen and (min-width: 760px) {
+
+  .site-content > .container > div {
+    float: left;
+    width: 70%;
+    display: block;
+  }
+
+  .site-content > .container aside {
+    float: right;
+    width: 25%;
+    img {
+      margin: 20px;
+    }
+  }
+}
+
+@media only screen and (min-width: 480px) {
+
+  nav a {
+    float: left;
+    width: 27%;
+    margin: 0 1.7%;
+    padding: 25px 2%;
+    margin-bottom: 0;
+  }
+
+  nav li:first-child a {
+    margin-left: 0;
+  }
+
+  nav li:last-child a {
+    margin-right: 0;
+  }
+
+  /* ========================
+      INTERMEDIATE: IE Fixes
+     ======================== */
+
+  nav ul li {
+    display: inline;
+  }
+}
+
+/* ==========================================================================
+   Print styles
+   ========================================================================== */
+
+@media print {
+  * {
+    background: transparent !important;
+    color: #000 !important; /* Black prints faster: h5bp.com/s */
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+
+  /*
+   * Don't show links for images, or javascript/internal links
+   */
+
+  .ir a:after,
+  a[href^="javascript:"]:after,
+  a[href^="#"]:after {
+    content: "";
+  }
+
+  pre,
+  blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+
+  thead {
+    display: table-header-group; /* h5bp.com/t */
+  }
+
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+
+  img {
+    max-width: 100% !important;
+  }
+
+  @page {
+    margin: 0.5cm;
+  }
+
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+}
+
+.site-header {
+  padding-top: 30px
+}
+
+.site-logo {
+  text-align: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+  text-decoration: none;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 0 #000
+}
+
+.site-nav {
+  float: right;
+  padding: 0;
+  margin: 7px 0 0;
+  list-style: none;
+
+  a {
+    color: #e08524;
+    text-decoration: none;
+    text-transform: uppercase
+  }
+  a:hover, .site-nav a:focus, .site-nav a:active {
+    color: #fff;
+  }
+}
+
+.site-promo {
+  padding: 3em 0;
+  text-align: center;
+
+  h1 {
+    color: #ddd;
+  }
+  .description {
+    margin: 1em 2em 0;
+    font-size: 1.25em;
+    color: #ddd
+  }
+}
+
+.site-content {
+  overflow: hidden;
+  padding: 1em 0 5em;
+  color: #333;
+  background: #fff;
 }

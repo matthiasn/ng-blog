@@ -11,8 +11,6 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="fragment" content="!">
 
-    <style type="text/css">.navbar-brand {color: white;}</style>
-
     <script src="//use.typekit.net/rco1jij.js"></script>
     <script>try {Typekit.load();} catch (e) {}</script>
 
@@ -26,15 +24,45 @@
     <!(endif)-->
 </head>
 <body data-ng-app="ngBlog">
-<div data-ng-controller="blogCtrl">
 
-    <div class="navbar navbar-default navbar-static-top navbar-inverse transparent" role="navigation">
+
+<div class="container">
+    <header class="site-header cf" role="banner">
+        <div class="site-logo">
+            NG-BLOG
+        </div>
+        <ul class="site-nav inline-block-list">
+            <li><a href="https://github.com/matthiasn/ng-blog" data-ga-category="Outbound links" data-ga-action="Nav click" data-ga-label="Source code">Source code</a></li>
+            <li><a href="https://github.com/matthiasn" data-ga-category="Outbound links" data-ga-action="Nav click" data-ga-label="Docs">Docs</a></li>
+            <li><a href="https://github.com/matthiasn" data-ga-category="Outbound links" data-ga-action="Nav click" data-ga-label="Other projects">Other projects</a></li>
+        </ul>
+    </header><!-- end site-header -->
+
+    <div class="site-promo">
+        <h1>The world’s most advanced blogging engine ;-)</h1>
+        <p class="description">ng-blog helps create a <strong>super-fast</strong> <strong>self-hosted</strong>, and <strong>adaptable</strong> blog.</p>
+        </div>
+    </div><!-- end site-promo -->
+</div>
+
+<div data-ng-controller="blogCtrl">
+    <div class="site-content">
         <div class="container">
-            <a class="navbar-brand" href="#">ng-blog</a>
+            <div ng-view></div>
+            <aside>
+                <img src="mn.jpg">
+                <h3>about me</h3>
+                <p>Hello everyone. My name is Matthias Nehlsen and I am exploring functional programming, data visualization
+                    and real-time information processing.</p>
+            </aside>
         </div>
     </div>
 
-    <div class="container" ng-view></div>
+    <div class="footer-container">
+        <footer class="wrapper">
+            <p>Copyright &copy; 2013 <a href="matthiasnehlsen.com" target="_blank">Matthias Nehlsen</a></p>
+        </footer>
+    </div>
 </div>
 
 <!--(if target dev)><!-->
@@ -59,7 +87,13 @@
 <!--<!(endif)-->
 
 <!--(if target dist)>
-<script src="js/ng-blog.min.js"></script>
+<script>
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.async = true;
+    script.src = 'js/ng-blog.min.js';
+    document.body.appendChild(script);
+</script>
 <!(endif)-->
 </body>
 </html>
