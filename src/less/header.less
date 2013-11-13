@@ -1,14 +1,13 @@
-.header-container {
-  max-width: 600px;
-  padding: 0 10px;
-  margin: 0 auto;
+@import "flexbox.less";
+
+.header {
+  .flex-display;
+  .flex-align-center;
+  .flex-direction-col;
+  padding: 25px;
 }
 
-.site-header { padding-top: 30px; }
-
 .site-logo {
-  //float: left;
-  text-align: center;
   color: darken(orange, 3%);
   font-weight: 700;
   font-size: 24px;
@@ -18,15 +17,13 @@
 }
 
 .site-nav {
-  //float: right;
-  text-align: center;
-  margin: 7px 0 0;
+  .flex-display;
   list-style: none;
-  line-height: 32px;
   a {
     color: @brand-primary;
-    text-decoration: none;
     text-transform: uppercase;
+    padding: 0 10px;
+    line-height: 20px;
   }
   a:hover, .site-nav a:focus, .site-nav a:active {
     color: #fff;
@@ -34,35 +31,15 @@
 }
 
 .site-promo {
-  //padding-top: 1em;
-  padding-bottom: 2em;
   text-align: center;
-
-  h1 { color: #ddd; }
+  max-width: 700px;
+  h1 {
+    margin-top: 15px;
+    margin-bottom: 0px;
+    color: #ddd;
+  }
   .description {
     font-size: 1.25em;
-    color: #ddd
+    color: #ddd;
   }
-}
-
-.site-content {
-  overflow: hidden;
-  padding: 1em 0 5em;
-  color: #333;
-  background: #fff;
-}
-
-.inline-block-list {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-
-  li {
-    display: inline-block;
-    padding: 0;
-    margin: 0 0 0 1.5em;
-    vertical-align: top;
-  }
-
-  li:first-child { margin-left: 0; }
 }
