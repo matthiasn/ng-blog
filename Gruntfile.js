@@ -16,27 +16,29 @@ module.exports = function (grunt) {
             'src/js/services/resource-cache.js',
             'src/js/controllers.js',
             'build/js/app.templates.js',
-            'src/js/directives/*.js' ]
-                } } },
+            'src/js/directives/*.js' ] } } },
         watch:       { jshint:  { files: ['src/**/*'], tasks: ['jshint'], options: { spawn: false } } },
-        targethtml:  { dist:    { files: { 'dist/index.html': 'src/index.html'} } },
+        targethtml:  { dist:    { files: { 'build/index.html': 'src/index.html'} } },
         karma:       { unit:    { configFile: 'conf/karma.conf.js', singleRun: false },
                        dist:    { configFile: 'conf/karma.conf.js', singleRun: true }},
-        less:        { dist:    { files: { "dist/css/main.css": "src/less/custom.less" } } },
+        less:        { dist:    { files: { "build/css/main.css": "src/less/custom.less" } } },
         concurrent:  { dev:     { tasks: ['watch', 'karma:unit'], options: { logConcurrentOutput: true } } },
         ngtemplates: { ngBlog:  { cwd: 'src', src: ['views/**.html', 'tpl/**.html'], dest: 'build/js/app.templates.js' } },
         jshint:      { options: { jshintrc: '.jshintrc' },
                        files:   { src: ['Gruntfile.js', 'src/js/**/*.js', '!src/js/vendor/*.js', 'scripts/server.js'] } },
-        cssmin:      { minify:  { expand: true,  cwd: 'dist/css/', src: 'main.css', dest: 'dist/css/', ext: '.min.css',
+        cssmin:      { minify:  { expand: true,  cwd: 'build/css/', src: 'main.css', dest: 'build/css/', ext: '.min.css',
                                   options: { keepSpecialComments: 0 } } },
         compress:    { main:    { options: { mode: 'gzip' }, expand: true,
-                       src:     [ 'dist/**/*.js', 'dist/**/*.css', 'dist/**/*.html', 'dist/**/*.json', 'dist/**/*.md',
-                                  'dist/**/*.svg', 'dist/**/*.ttf', 'dist/**/*.otf' ], dest: '.' } },
+                       src:       [ 'dist/**/*.js', 'dist/**/*.css', 'dist/**/*.html', 'dist/**/*.json', 'dist/**/*.md',
+                                    'dist/**/*.svg', 'dist/**/*.ttf', 'dist/**/*.otf' ], dest: '.' } },
         copy:        { main:    { files: [ { expand: true, cwd: 'src',  src: ['fonts/**'], dest: 'dist/'},
-                                           { expand: true, cwd: 'src',  src: ['blog/**'],  dest: 'dist/'} ] } }
+                                           { expand: true, cwd: 'src',  src: ['blog/**'],  dest: 'dist/'} ] } },
+        htmlbuild:   { dist:    { src: 'build/index.html', dest: 'dist/',
+                                  options: { relative: true, styles: { bundle: 'build/css/main.min.css' } } } }
     });
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-targethtml');
+    grunt.loadNpmTasks('grunt-html-build');
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-concurrent');
     grunt.loadNpmTasks('grunt-contrib-less');
@@ -46,6 +48,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-angular-templates');
     grunt.loadNpmTasks('grunt-contrib-compress');
-    grunt.registerTask('dist', ['ngtemplates', 'jshint', 'karma:dist', 'less', 'uglify', 'targethtml', 'copy', 'cssmin', 'compress']);
+    grunt.registerTask('dist', ['ngtemplates', 'jshint', 'karma:dist', 'less', 'uglify', 'targethtml',
+        'copy', 'cssmin', 'htmlbuild', 'compress']);
     grunt.registerTask('default', ['concurrent:dev']);
 };
