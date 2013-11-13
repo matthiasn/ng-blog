@@ -32,13 +32,17 @@ module.exports = function (grunt) {
                        src:       [ 'dist/**/*.js', 'dist/**/*.css', 'dist/**/*.html', 'dist/**/*.json', 'dist/**/*.md',
                                     'dist/**/*.svg', 'dist/**/*.ttf', 'dist/**/*.otf' ], dest: '.' } },
         copy:        { main:    { files: [ { expand: true, cwd: 'src',  src: ['fonts/**'], dest: 'dist/'},
+                                           { expand: true, cwd: 'src',  src: ['img/**'], dest: 'dist/'},
                                            { expand: true, cwd: 'src',  src: ['blog/**'],  dest: 'dist/'} ] } },
-        htmlbuild:   { dist:    { src: 'build/index.html', dest: 'dist/',
-                                  options: { relative: true, styles: { bundle: 'build/css/main.min.css' } } } }
+        htmlbuild:   { dist:    { src: 'build/index.html', dest: 'build/index-inline.html',
+                                  options: { relative: true, styles: { bundle: 'build/css/main.min.css' } } } },
+        htmlmin:     { dist:    { options: { removeComments: true, collapseWhitespace: true },
+                                  files:   { 'dist/index.html': 'build/index-inline.html' } } }
     });
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-targethtml');
     grunt.loadNpmTasks('grunt-html-build');
+    grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-karma');
     grunt.loadNpmTasks('grunt-concurrent');
     grunt.loadNpmTasks('grunt-contrib-less');
@@ -49,6 +53,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-angular-templates');
     grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.registerTask('dist', ['ngtemplates', 'jshint', 'karma:dist', 'less', 'uglify', 'targethtml',
-        'copy', 'cssmin', 'htmlbuild', 'compress']);
+        'copy', 'cssmin', 'htmlbuild', 'htmlmin', 'compress']);
     grunt.registerTask('default', ['concurrent:dev']);
 };
